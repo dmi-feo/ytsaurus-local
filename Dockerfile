@@ -8,7 +8,7 @@ COPY --from=ytsaurus /usr/bin/ytserver-all /usr/bin/ytserver-all
 COPY ./configs /configs
 COPY ./supervisord.conf /etc/supervisord.conf
 
-RUN for SERVICE in master http-proxy node; \
+RUN for SERVICE in master http-proxy node scheduler controller-agent; \
     do ln -s /usr/bin/ytserver-all /usr/bin/ytserver-$SERVICE; done
 
 CMD ["supervisord"]
