@@ -1,0 +1,34 @@
+{
+    "address_resolver"={
+        "enable_ipv4"=%true;
+        "enable_ipv6"=%false;
+        retries=1000;
+    };
+    logging={
+        writers={
+        };
+        rules=[
+        ];
+        "flush_period"=0;
+    };
+    driver={
+        "timestamp_provider"={
+            addresses=[
+                "localhost:22290";
+            ];
+        };
+        "primary_master"={
+            addresses=[
+                "localhost:22290";
+            ];
+            peers=[
+                {
+                    address="localhost:22290";
+                    voting=%true;
+                };
+            ];
+            "cell_id"="f85de883-ffffffff-10259-ffffffff";
+        };
+        "api_version"=4;
+    };
+}

@@ -12,7 +12,7 @@
         "update_period" = 500;
     };
     "cluster_connection" = {
-        "cluster_name" = "9bea11f7-363e115c-3447e3f7-1e80b98d";
+        "cluster_name" = "hegel";
         "cell_directory" = {
             "soft_backoff_time" = 100;
             "hard_backoff_time" = 100;
@@ -179,7 +179,7 @@
                 {
                     "low_watermark" = 1;
                     "location_is_absolute" = %false;
-                    "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/node/0/layers";
+                    "path" = "/tmp/hegel/runtime_data/node/0/layers";
                 };
             ];
         };
@@ -190,7 +190,7 @@
                 "io_config" = {
                     "enable_sync" = %false;
                 };
-                "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/node/0/chunk_cache";
+                "path" = "/tmp/hegel/runtime_data/node/0/chunk_cache";
             };
         ];
         "store_locations" = [
@@ -211,7 +211,7 @@
                 "low_latency_split_changelog" = {
                     "preallocate_size" = 1048576;
                 };
-                "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/node/0/chunk_store/0";
+                "path" = "/tmp/hegel/runtime_data/node/0/chunk_store/0";
                 "max_trash_ttl" = 0;
             };
         ];
@@ -225,7 +225,7 @@
             "do_not_set_user_id" = %true;
             "locations" = [
                 {
-                    "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/node/0/slots";
+                    "path" = "/tmp/hegel/runtime_data/node/0/slots";
                     "disk_usage_watermark" = 0;
                 };
             ];
@@ -247,12 +247,12 @@
                 "writers" = {
                     "info" = {
                         "type" = "file";
-                        "file_name" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/logs/job_proxy-0-slot-%slot_index%.log";
+                        "file_name" = "/tmp/hegel/logs/job_proxy-0-slot-%slot_index%.log";
                     };
                 };
             };
-            "job_proxy_stderr_path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/logs/job_proxy-0-stderr-slot-%slot_index%";
-            "executor_stderr_path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/logs/ytserver_exec-0-stderr-slot-%slot_index%";
+            "job_proxy_stderr_path" = "/tmp/hegel/logs/job_proxy-0-stderr-slot-%slot_index%";
+            "executor_stderr_path" = "/tmp/hegel/logs/ytserver_exec-0-stderr-slot-%slot_index%";
         };
         "job_prepare_time_limit" = 60000;
     };

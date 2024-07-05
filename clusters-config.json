@@ -1,0 +1,18 @@
+{
+  "clusters": [
+    {
+      "id": "hegel",
+      "name": "hegel",
+      "proxy": "host.docker.internal:38000",
+      "secure": false,
+      "authentication": "basic",
+      "group": "chaos-coordinator",
+      "theme": "lavander",
+      "description": "Production cluster",
+      "environment": "production",
+      "primaryMaster": {
+        "cellTag": 1
+      }
+    }
+  ]
+}

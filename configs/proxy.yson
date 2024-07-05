@@ -6,10 +6,11 @@
         };
     };
     "auth" = {
-        "enable_authentication" = %false;
+        "enable_authentication" = %true;
         "blackbox_service" = {
         };
         "cypress_token_authenticator" = {
+            secure=%true;
         };
         "blackbox_token_authenticator" = {
             "scope" = "";
@@ -96,7 +97,7 @@
         "enable_internal_commands" = %true;
     };
     "cluster_connection" = {
-        "cluster_name" = "9bea11f7-363e115c-3447e3f7-1e80b98d";
+        "cluster_name" = "hegel";
         "cell_directory" = {
             "soft_backoff_time" = 100;
             "hard_backoff_time" = 100;

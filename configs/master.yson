@@ -18,7 +18,7 @@
         "io_engine" = {
             "enable_sync" = %false;
         };
-        "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/master/0/changelogs";
+        "path" = "/tmp/hegel/runtime_data/master/0/changelogs";
     };
     "object_service" = {
         "enable_local_read_executor" = %true;
@@ -111,7 +111,7 @@
     ];
     "enable_timestamp_manager" = %true;
     "snapshots" = {
-        "path" = "/tmp/9bea11f7-363e115c-3447e3f7-1e80b98d/runtime_data/master/0/snapshots";
+        "path" = "/tmp/hegel/runtime_data/master/0/snapshots";
     };
     "logging" = {
         "abort_on_alert" = %true;
@@ -141,7 +141,7 @@
         };
     };
     "cluster_connection" = {
-        "cluster_name" = "9bea11f7-363e115c-3447e3f7-1e80b98d";
+        "cluster_name" = "hegel";
         "cell_directory" = {
             "soft_backoff_time" = 100;
             "hard_backoff_time" = 100;
