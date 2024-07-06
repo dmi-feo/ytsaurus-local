@@ -1,9 +1,9 @@
 {
-    "orchid_cache_update_period" = 0;
-    "resource_limits" = {
+    "resource_limits"={
         "cpu_per_tablet_slot" = 0.0;
         "memory" = 22733127680;
     };
+    "orchid_cache_update_period" = 0;
     "master_cache_service" = {
         "capacity" = 16777216;
         "rate_limit" = 100;
@@ -217,45 +217,71 @@
         ];
         "max_bytes_per_read" = 10737418240;
     };
-    "exec_node" = {
-        "slot_manager" = {
-            "job_environment" = {
-                "type" = "simple";
-            };
-            "do_not_set_user_id" = %true;
-            "locations" = [
+    "exec_node"={
+        "slot_manager"={
+            locations=[
                 {
-                    "path" = "/tmp/hegel/runtime_data/node/0/slots";
-                    "disk_usage_watermark" = 0;
+                    path="/yt/node-data/slots";
+                    "disk_usage_watermark"=0;
                 };
             ];
+            "job_environment"={
+                type=simple;
+                "start_uid"=19500;
+            };
+            "enable_tmpfs"=%true;
         };
-        "job_proxy_heartbeat_period" = 200;
-        "job_proxy" = {
-            "job_proxy_heartbeat_period" = 200;
-            "job_proxy_logging" = {
-                "abort_on_alert" = %true;
-                "compression_thread_count" = 4;
-                "rules" = [
-                    {
-                        "min_level" = "info";
-                        "writers" = [
-                            "info";
-                        ];
-                    };
-                ];
-                "writers" = {
-                    "info" = {
-                        "type" = "file";
-                        "file_name" = "/tmp/hegel/logs/job_proxy-0-slot-%slot_index%.log";
-                    };
+        "job_controller"={
+            "resource_limits"={
+                cpu=23;
+                memory=17179869184;
+                user_slots=10;
+            };
+        };
+        "job_proxy_authentication_manager"={
+            "cypress_cookie_manager"={
+            };
+            "cypress_user_manager"={
+            };
+            "cypress_token_authenticator"={
+                secure=%true;
+            };
+            "require_authentication"=%true;
+        };
+        "job_proxy_logging"={
+            writers={
+                info={
+                    type=file;
+                    "file_name"="job-proxy.info.log";
+                    format="plain_text";
+                    "enable_system_messages"=%true;
+                };
+                stderr={
+                    type=stderr;
+                    format="plain_text";
+                    "enable_system_messages"=%true;
                 };
             };
-            "job_proxy_stderr_path" = "/tmp/hegel/logs/job_proxy-0-stderr-slot-%slot_index%";
-            "executor_stderr_path" = "/tmp/hegel/logs/ytserver_exec-0-stderr-slot-%slot_index%";
+            rules=[
+                {
+                    "min_level"=info;
+                    writers=[
+                        info;
+                    ];
+                    family="plain_text";
+                };
+                {
+                    "min_level"=error;
+                    writers=[
+                        stderr;
+                    ];
+                    family="plain_text";
+                };
+            ];
+            "flush_period"=3000;
         };
-        "job_prepare_time_limit" = 60000;
     };
+
     "cellar_node" = {
         "master_connector" = {
             "heartbeat_period" = 300;
@@ -330,7 +356,7 @@
         "yt_env_index" = 0;
     };
     "enable_ref_counted_tracker_profiling" = %false;
-    "enable_resource_tracker" = %false;
+    "enable_resource_tracker" = %true;
     "addresses" = [
         [
             "interconnect";
@@ -361,14 +387,5 @@
                 "file_name" = "/var/log/yt-node.log";
             };
         };
-    };
-    "job_resource_manager" = {
-        "resource_limits" = {
-            "memory" = 17179869184;
-            "cpu" = 1;
-            "user_slots" = 10;
-        };
-        "start_port" = 20000;
-        "port_count" = 10000;
     };
 }

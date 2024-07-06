@@ -17,7 +17,8 @@ RUN for package in client yson local native_driver; \
 COPY ./configs /configs
 COPY ./supervisord.conf /etc/supervisord.conf
 
-RUN for SERVICE in master http-proxy node scheduler controller-agent; \
-    do ln -s /usr/bin/ytserver-all /usr/bin/ytserver-$SERVICE; done
+RUN for PROGRAM in master http-proxy node scheduler controller-agent job-proxy exec discovery clock cell-balancer \
+      master-cache proxy queue-agent replicated-table-tracker tablet-balancer timestamp-provider tools; \
+    do ln -s /usr/bin/ytserver-all /usr/bin/ytserver-$PROGRAM; done
 
 CMD ["supervisord"]
