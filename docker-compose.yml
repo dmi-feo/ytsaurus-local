@@ -11,11 +11,10 @@ services:
       - 30080:80
     environment:
       PROXY: host.docker.internal:38000
-#      APP_ENV: development
       APP_INSTALLATION: "custom"
       ALLOW_PASSWORD_AUTH: "1"
       YT_AUTH_ALLOW_INSECURE: "1"
       YT_AUTH_CLUSTER_ID: "hegel"
     volumes:
-      - ./clusters-config.json:/opt/app/clusters-config.json
-      - ./yt-interface-secret.json:/opt/app/secrets/yt-interface-secret.json
+      - ./ui/clusters-config.json:/opt/app/clusters-config.json
+      - ./ui/yt-interface-secret.json:/opt/app/secrets/yt-interface-secret.json

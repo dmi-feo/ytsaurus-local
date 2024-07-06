@@ -1,23 +1,14 @@
 {
     "port" = 80;
-    "api" = {
-        "cors" = {
-            "disable_cors_check" = %true;
+    auth={
+        "cypress_cookie_manager"={
         };
-    };
-    "auth" = {
-        "enable_authentication" = %true;
-        "blackbox_service" = {
+        "cypress_user_manager"={
         };
-        "cypress_token_authenticator" = {
+        "cypress_token_authenticator"={
             secure=%true;
         };
-        "blackbox_token_authenticator" = {
-            "scope" = "";
-            "enable_scope_check" = %false;
-        };
-        "blackbox_cookie_authenticator" = {
-        };
+        "require_authentication"=%true;
     };
     "coordinator" = {
         "enable" = %true;

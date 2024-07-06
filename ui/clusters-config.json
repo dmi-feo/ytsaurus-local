@@ -6,10 +6,10 @@
       "proxy": "host.docker.internal:38000",
       "secure": false,
       "authentication": "basic",
-      "group": "chaos-coordinator",
+      "group": "Mijn lokale cluster",
       "theme": "lavander",
       "description": "Production cluster",
-      "environment": "production",
+      "environment": "development",
       "primaryMaster": {
         "cellTag": 1
       }
