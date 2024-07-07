@@ -179,7 +179,7 @@
                 {
                     "low_watermark" = 1;
                     "location_is_absolute" = %false;
-                    "path" = "/tmp/hegel/runtime_data/node/0/layers";
+                    "path" = "/yt/hegel/runtime_data/node/0/layers";
                 };
             ];
         };
@@ -190,7 +190,7 @@
                 "io_config" = {
                     "enable_sync" = %false;
                 };
-                "path" = "/tmp/hegel/runtime_data/node/0/chunk_cache";
+                "path" = "/yt/hegel/runtime_data/node/0/chunk_cache";
             };
         ];
         "store_locations" = [
@@ -211,7 +211,7 @@
                 "low_latency_split_changelog" = {
                     "preallocate_size" = 1048576;
                 };
-                "path" = "/tmp/hegel/runtime_data/node/0/chunk_store/0";
+                "path" = "/yt/hegel/runtime_data/node/0/chunk_store/0";
                 "max_trash_ttl" = 0;
             };
         ];
