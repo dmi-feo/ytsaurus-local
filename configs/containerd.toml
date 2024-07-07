@@ -1,0 +1,6 @@
+version = 2
+
+[grpc]
+  address = "unix:///yt/cri_runtime.sock"
+  gid = 0
+  uid = 0

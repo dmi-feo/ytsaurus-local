@@ -226,8 +226,30 @@
                 };
             ];
             "job_environment"={
-                type=simple;
-                "start_uid"=19500;
+                type=cri;
+                "job_proxy_image" = "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0";
+                "use_job_proxy_from_image" = %false;
+                "job_proxy_bind_mounts" = [
+                    {
+                        "internal_path" = "/yt";
+                        "external_path" = "/yt";
+                        "read_only" = %false;
+                    };
+                ];
+                "cri_executor" = {
+                    "runtime_endpoint" = "unix:///yt/cri_runtime.sock";
+                    "image_endpoint" = "unix:///yt/cri_runtime.sock";
+                    "base_cgroup" = "/yt";
+                    "namespace" = "yt";
+                    "retry_backoff_time" = 1000;
+                    "retry_attempts" = 1800;
+                    "retry_error_prefixes" = [
+                        "server is not initialized yet";
+                        "failed to create containerd task: failed to create shim task";
+                        "failed to delete containerd container";
+                        "failed to prepare extraction snapshot";
+                    ];
+                };
             };
             "enable_tmpfs"=%true;
         };

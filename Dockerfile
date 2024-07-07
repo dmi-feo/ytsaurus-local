@@ -1,7 +1,10 @@
 FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 as ytsaurus
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y supervisor python3 python3-pip && apt-get clean
+RUN apt-get update && apt-get install -y supervisor python3 python3-pip containerd && apt-get clean
+
+# TODO: delete
+RUN apt-get update && apt-get install -y less vim && apt-get clean
 
 COPY --from=ytsaurus /usr/bin/ytserver-all /usr/bin/ytserver-all
 
