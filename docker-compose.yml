@@ -5,8 +5,11 @@ services:
     platform: linux/amd64
     ports:
       - 38000:80
+    privileged: true
     volumes:
-      - /run/containerd/containerd.sock:/yt/cri_runtime.sock
+      - /run/containerd:/run/containerd
+      - /var/lib/containerd:/var/lib/containerd
+      - /tmp:/tmp
   yt-ui:
     image: ytsaurus/ui:stable
     ports:

@@ -237,8 +237,8 @@
                     };
                 ];
                 "cri_executor" = {
-                    "runtime_endpoint" = "unix:///yt/cri_runtime.sock";
-                    "image_endpoint" = "unix:///yt/cri_runtime.sock";
+                    "runtime_endpoint" = "unix:///run/containerd/containerd.sock";
+                    "image_endpoint" = "unix:///run/containerd/containerd.sock";
                     "base_cgroup" = "/yt";
                     "namespace" = "yt";
                     "retry_backoff_time" = 1000;
@@ -274,7 +274,7 @@
             writers={
                 info={
                     type=file;
-                    "file_name"="job-proxy.info.log";
+                    "file_name"="/var/log/yt-job-proxy.info.log";
                     format="plain_text";
                     "enable_system_messages"=%true;
                 };
