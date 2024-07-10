@@ -24,4 +24,8 @@ RUN for PROGRAM in master http-proxy node scheduler controller-agent job-proxy e
       master-cache proxy queue-agent replicated-table-tracker tablet-balancer timestamp-provider tools; \
     do ln -s /usr/bin/ytserver-all /usr/bin/ytserver-$PROGRAM; done
 
+RUN for PROGRAM in master http-proxy node scheduler controller-agent job-proxy exec discovery clock cell-balancer \
+      master-cache proxy queue-agent replicated-table-tracker tablet-balancer timestamp-provider tools; \
+    do ln -s /usr/bin/ytserver-all /usr/local/bin/ytserver-$PROGRAM; done
+
 CMD ["supervisord"]

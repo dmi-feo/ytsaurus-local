@@ -77,3 +77,5 @@ if [ $(yt exists //sys/users/admin) = 'false' ]; then
 fi
 
 yt create document //sys/client_config --attributes '{"value"={"proxy"={"enable_proxy_discovery"=%false};};}'
+
+

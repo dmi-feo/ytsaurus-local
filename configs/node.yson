@@ -286,7 +286,7 @@
             };
             rules=[
                 {
-                    "min_level"=info;
+                    "min_level"=debug;
                     writers=[
                         info;
                     ];
@@ -397,7 +397,7 @@
         "compression_thread_count" = 4;
         "rules" = [
             {
-                "min_level" = "info";
+                "min_level" = "debug";
                 "writers" = [
                     "info";
                 ];
