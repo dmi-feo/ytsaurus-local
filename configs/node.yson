@@ -229,13 +229,6 @@
                 type=cri;
                 "job_proxy_image" = "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0";
                 "use_job_proxy_from_image" = %false;
-                "job_proxy_bind_mounts" = [
-                    {
-                        "internal_path" = "/yt";
-                        "external_path" = "/yt";
-                        "read_only" = %false;
-                    };
-                ];
                 "cri_executor" = {
                     "runtime_endpoint" = "unix:///run/containerd/containerd.sock";
                     "image_endpoint" = "unix:///run/containerd/containerd.sock";
