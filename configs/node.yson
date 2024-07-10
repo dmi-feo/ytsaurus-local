@@ -285,6 +285,23 @@
                     "enable_system_messages"=%true;
                 };
             };
+            rules=[
+                {
+                    "min_level"=info;
+                    writers=[
+                        info;
+                    ];
+                    family="plain_text";
+                };
+                {
+                    "min_level"=error;
+                    writers=[
+                        stderr;
+                    ];
+                    family="plain_text";
+                };
+            ];
+            "flush_period"=3000;
         };
     };
 
