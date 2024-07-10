@@ -251,7 +251,8 @@
                     ];
                 };
             };
-            "enable_tmpfs"=%true;
+            "do_not_set_user_id"=%true;
+            "enable_tmpfs"=%false;
         };
         "job_controller"={
             "resource_limits"={
