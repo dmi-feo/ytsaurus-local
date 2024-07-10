@@ -3,7 +3,7 @@
     {
       "id": "hegel",
       "name": "hegel",
-      "proxy": "172.17.0.1:38000:38000",
+      "proxy": "172.17.0.1:38000",
       "secure": false,
       "authentication": "basic",
       "group": "Mijn lokale cluster",
