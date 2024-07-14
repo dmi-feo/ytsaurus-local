@@ -1,7 +1,17 @@
 FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 as ytsaurus
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y supervisor python3 python3-pip containerd less && apt-get clean
+RUN apt-get update && apt-get install -y supervisor python3 python3-pip containerd less wget iptables && apt-get clean
+
+RUN wget https://github.com/containerd/nerdctl/releases/download/v1.5.0/nerdctl-1.5.0-linux-amd64.tar.gz && \
+    tar -zxf nerdctl-1.5.0-linux-amd64.tar.gz nerdctl && \
+    mv nerdctl /usr/bin/nerdctl && \
+    rm nerdctl-1.5.0-linux-amd64.tar.gz
+
+RUN wget https://github.com/containernetworking/plugins/releases/download/v1.3.0/cni-plugins-linux-amd64-v1.3.0.tgz && \
+    mkdir -p /opt/cni/bin/ && \
+    tar -zxf cni-plugins-linux-amd64-v1.3.0.tgz -C /opt/cni/bin/ && \
+    rm cni-plugins-linux-amd64-v1.3.0.tgz
 
 COPY --from=ytsaurus /usr/bin/ytserver-all /usr/bin/ytserver-all
 
