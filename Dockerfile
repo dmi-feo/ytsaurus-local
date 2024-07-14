@@ -1,10 +1,7 @@
 FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 as ytsaurus
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y supervisor python3 python3-pip containerd && apt-get clean
-
-# TODO: delete
-RUN apt-get update && apt-get install -y less vim && apt-get clean
+RUN apt-get update && apt-get install -y supervisor python3 python3-pip containerd less && apt-get clean
 
 COPY --from=ytsaurus /usr/bin/ytserver-all /usr/bin/ytserver-all
 
@@ -19,6 +16,10 @@ RUN for package in client yson local native_driver; \
 
 COPY ./configs /configs
 COPY ./supervisord.conf /etc/supervisord.conf
+COPY ./modprobe /usr/local/bin/
+
+VOLUME /var/lib/containerd
+#VOLUME /run/containerd
 
 RUN for PROGRAM in master http-proxy node scheduler controller-agent job-proxy exec discovery clock cell-balancer \
       master-cache proxy queue-agent replicated-table-tracker tablet-balancer timestamp-provider tools; \

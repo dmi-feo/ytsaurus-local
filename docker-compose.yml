@@ -2,14 +2,13 @@ services:
   yt-backend:
     build:
       context: .
+      dockerfile: Dockerfile
     platform: linux/amd64
     ports:
       - 38000:80
+    environment:
+      YT_DISABLE_SANDBOX_CLEANUP: "1"
     privileged: true
-    volumes:
-      - /run/containerd:/run/containerd
-      - /var/lib/containerd:/var/lib/containerd
-      - /tmp:/tmp
   yt-ui:
     image: ytsaurus/ui:stable
     ports:
