@@ -244,9 +244,9 @@
                     ];
                 };
             };
-            "do_not_set_user_id"=%true;
             "enable_tmpfs"=%false;
         };
+        "do_not_set_user_id"=%true;
         "job_controller"={
             "resource_limits"={
                 cpu=23;
