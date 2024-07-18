@@ -18,7 +18,7 @@
         "io_engine" = {
             "enable_sync" = %false;
         };
-        "path" = "/tmp/hegel/runtime_data/master/0/changelogs";
+        "path" = "/yt/hegel/runtime_data/master/0/changelogs";
     };
     "object_service" = {
         "enable_local_read_executor" = %true;
@@ -111,7 +111,7 @@
     ];
     "enable_timestamp_manager" = %true;
     "snapshots" = {
-        "path" = "/tmp/hegel/runtime_data/master/0/snapshots";
+        "path" = "/yt/hegel/runtime_data/master/0/snapshots";
     };
     "logging" = {
         "abort_on_alert" = %true;

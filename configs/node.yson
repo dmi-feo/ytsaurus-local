@@ -179,7 +179,7 @@
                 {
                     "low_watermark" = 1;
                     "location_is_absolute" = %false;
-                    "path" = "/tmp/hegel/runtime_data/node/0/layers";
+                    "path" = "/yt/hegel/runtime_data/node/0/layers";
                 };
             ];
         };
@@ -190,7 +190,7 @@
                 "io_config" = {
                     "enable_sync" = %false;
                 };
-                "path" = "/tmp/hegel/runtime_data/node/0/chunk_cache";
+                "path" = "/yt/hegel/runtime_data/node/0/chunk_cache";
             };
         ];
         "store_locations" = [
@@ -211,7 +211,7 @@
                 "low_latency_split_changelog" = {
                     "preallocate_size" = 1048576;
                 };
-                "path" = "/tmp/hegel/runtime_data/node/0/chunk_store/0";
+                "path" = "/yt/hegel/runtime_data/node/0/chunk_store/0";
                 "max_trash_ttl" = 0;
             };
         ];
@@ -226,11 +226,27 @@
                 };
             ];
             "job_environment"={
-                type=simple;
-                "start_uid"=19500;
+                type=cri;
+                "job_proxy_image" = "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0";
+                "use_job_proxy_from_image" = %false;
+                "cri_executor" = {
+                    "runtime_endpoint" = "unix:///run/containerd/containerd.sock";
+                    "image_endpoint" = "unix:///run/containerd/containerd.sock";
+                    "base_cgroup" = "/yt";
+                    "namespace" = "yt";
+                    "retry_backoff_time" = 1000;
+                    "retry_attempts" = 1800;
+                    "retry_error_prefixes" = [
+                        "server is not initialized yet";
+                        "failed to create containerd task: failed to create shim task";
+                        "failed to delete containerd container";
+                        "failed to prepare extraction snapshot";
+                    ];
+                };
             };
-            "enable_tmpfs"=%true;
+            "enable_tmpfs"=%false;
         };
+        "do_not_set_user_id"=%true;
         "job_controller"={
             "resource_limits"={
                 cpu=23;
@@ -375,7 +391,7 @@
         "compression_thread_count" = 4;
         "rules" = [
             {
-                "min_level" = "info";
+                "min_level" = "debug";
                 "writers" = [
                     "info";
                 ];
