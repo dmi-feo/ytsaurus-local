@@ -16,6 +16,8 @@ fi
 
 export YT_DRIVER_CONFIG_PATH=/configs/client.yson
 
+yt set //sys/@provision_lock true
+
 yt create group --attr '{name=admins}' --ignore-existing
 
 yt set //sys/schemas/tablet_cell/@acl '[{action=allow;subjects=[users;];permissions=[read;];};{action=allow;subjects=[admins;];permissions=[read;write;administer;create;remove;];};]'
@@ -89,3 +91,5 @@ if [ $(yt exists //sys/users/admin) = 'false' ]; then
 fi
 
 yt create document //sys/client_config --attributes '{"value"={"proxy"={"enable_proxy_discovery"=%false};};}'
+
+yt remove //sys/@provision_lock -f
