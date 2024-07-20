@@ -28,6 +28,6 @@ do
     fi
 done
 
-yt vanilla \
+timeout 3m yt vanilla \
   --tasks '{task={job_count=1; command="echo hello  >&2"; cpu_limit=2};}' \
   --spec '{resource_limits={user_slots=1}}'
