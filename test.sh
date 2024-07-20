@@ -12,8 +12,6 @@ trap 'docker stop $container_id && docker rm $container_id' EXIT
 export YT_TOKEN="topsecret"
 export YT_PROXY="localhost:$port_num"
 
-sleep 20s
-
 i=0
 while [ 1 ]
 do
@@ -28,6 +26,6 @@ do
     fi
 done
 
-yt vanilla \
+timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="echo hello  >&2"; cpu_limit=2};}' \
   --spec '{resource_limits={user_slots=1}}'

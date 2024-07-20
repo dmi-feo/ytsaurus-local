@@ -16,8 +16,6 @@ fi
 
 export YT_DRIVER_CONFIG_PATH=/configs/client.yson
 
-yt set //sys/@provision_lock true
-
 yt create group --attr '{name=admins}' --ignore-existing
 
 yt set //sys/schemas/tablet_cell/@acl '[{action=allow;subjects=[users;];permissions=[read;];};{action=allow;subjects=[admins;];permissions=[read;write;administer;create;remove;];};]'
