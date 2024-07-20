@@ -16,7 +16,7 @@ fi
 
 export YT_DRIVER_CONFIG_PATH=/configs/client.yson
 
-yt set //sys/@provision_lock true
+#yt set //sys/@provision_lock true
 
 yt create group --attr '{name=admins}' --ignore-existing
 
