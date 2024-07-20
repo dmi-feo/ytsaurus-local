@@ -6,8 +6,6 @@ services:
     platform: linux/amd64
     ports:
       - 38000:80
-    environment:
-      YT_DISABLE_SANDBOX_CLEANUP: "1"
     privileged: true
   yt-ui:
     image: ytsaurus/ui:stable
