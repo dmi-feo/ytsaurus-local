@@ -23,7 +23,6 @@ RUN for package in client yson local native_driver; \
 
 COPY ./configs /configs
 COPY ./supervisord.conf /etc/supervisord.conf
-COPY ./modprobe /usr/local/bin/
 
 VOLUME /var/lib/containerd
 
