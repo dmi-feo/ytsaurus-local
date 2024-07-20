@@ -12,7 +12,7 @@ trap 'docker stop $container_id && docker rm $container_id' EXIT
 export YT_TOKEN="topsecret"
 export YT_PROXY="localhost:$port_num"
 
-sleep 20s
+#sleep 20s
 
 i=0
 while [ 1 ]
