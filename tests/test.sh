@@ -36,4 +36,4 @@ timeout --preserve-status -v 3m yt vanilla \
 # check auth is working
 
 unset YT_TOKEN
-yt list / && { echo "Something wrong with yt auth"; exit 1; }
+yt list / && { echo "Something wrong with yt auth"; exit 1; } || echo "Auth ok"
