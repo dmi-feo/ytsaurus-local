@@ -5,7 +5,11 @@ set -ex
 image_id=$(docker build -q --platform linux/amd64 .)
 port_num=$(shuf -i 40000-50000 -n 1)
 
-container_id=$(docker run -q -d --privileged -p $port_num:80 -e YTLOCAL_AUTH_ENABLED=1 $image_id)
+container_id=$(docker run -q -d \
+  --privileged \
+  -p $port_num:80 \
+  -e YTLOCAL_AUTH_ENABLED=1 -e YTLOCAL_CRI_ENABLED=1 \
+  $image_id)
 
 trap 'docker stop $container_id && docker rm $container_id' EXIT
 
@@ -28,9 +32,10 @@ do
     fi
 done
 
+
 timeout --preserve-status -v 3m yt vanilla \
-  --tasks '{task={job_count=1; command="echo hello  >&2"; cpu_limit=2};}' \
-  --spec '{resource_limits={user_slots=1}}'
+  --tasks '{task={job_count=1; command="python3 --version | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
+  --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
 
 
 # check auth is working

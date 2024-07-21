@@ -26,3 +26,26 @@ if os.environ.get("YTLOCAL_AUTH_ENABLED", "0") == "1":
 
     with modify_yt_config(NODE_CONFIG_PATH) as node_config:
         node_config["exec_node"]["job_proxy_authentication_manager"]["require_authentication"] = True
+
+
+if os.environ.get("YTLOCAL_CRI_ENABLED", "0") == "1":
+    with modify_yt_config(NODE_CONFIG_PATH) as node_config:
+        node_config["exec_node"]["slot_manager"]["job_environment"] = {
+            "type": "cri",
+            "job_proxy_image": "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0",
+            "use_job_proxy_from_image": False,
+            "cri_executor": {
+                "runtime_endpoint": "unix:///run/containerd/containerd.sock",
+                "image_endpoint": "unix:///run/containerd/containerd.sock",
+                "base_cgroup": "/yt",
+                "namespace": "yt",
+                "retry_backoff_time": 1000,
+                "retry_attempts": 1800,
+                "retry_error_prefixes": [
+                    "server is not initialized yet",
+                    "failed to create containerd task: failed to create shim task",
+                    "failed to delete containerd container",
+                    "failed to prepare extraction snapshot",
+                ]
+            }
+        }
