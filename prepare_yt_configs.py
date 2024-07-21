@@ -26,17 +26,3 @@ if os.environ.get("YTLOCAL_AUTH_ENABLED", "0") == "1":
 
     with modify_yt_config(NODE_CONFIG_PATH) as node_config:
         node_config["exec_node"]["job_proxy_authentication_manager"]["require_authentication"] = True
-
-    # with open(PROXY_CONFIG_PATH, "rb+") as f:
-    #     proxy_config = yt.yson.load(f)
-    #     f.seek(0)
-    #     proxy_config["auth"]["require_authentication"] = True
-    #     yt.yson.dump(proxy_config, f, yson_format="pretty")
-    #     f.truncate()
-    #
-    # with open("/yt_configs/node.yson", "rb+") as f:
-    #     node_config = yt.yson.load(f)
-    #     f.seek(0)
-    #     node_config["exec_node"]["job_proxy_authentication_manager"]["require_authentication"] = True
-    #     yt.yson.dump(node_config, f, yson_format="pretty")
-    #     f.truncate()
