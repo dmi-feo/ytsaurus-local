@@ -262,7 +262,7 @@
             "cypress_token_authenticator"={
                 secure=%true;
             };
-            "require_authentication"=%true;
+            "require_authentication"=%false;
         };
         "job_proxy_logging"={
             writers={

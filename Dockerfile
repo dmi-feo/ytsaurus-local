@@ -1,4 +1,4 @@
-FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 as ytsaurus
+FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 AS ytsaurus
 FROM ubuntu:22.04
 
 RUN apt-get update && \
@@ -20,9 +20,18 @@ RUN for package in client yson local native_driver; \
     python3 -m pip install ${wheel_path}; \
   done
 
-
-COPY ./configs /configs
 COPY ./supervisord.conf /etc/supervisord.conf
+COPY ./containerd.toml /etc/containerd/config.toml
+
+RUN mkdir /yt_scripts
+RUN mkdir /yt_configs
+
+COPY ./yt_configs /yt_configs
+
+COPY ./yt_init /yt_scripts/yt_init
+COPY ./prepare_yt_configs.py /yt_scripts/prepare_yt_configs.py
+COPY ./start.sh /yt_scripts/start.sh
+COPY ./init_container.sh /yt_scripts/init_container.sh
 
 VOLUME /var/lib/containerd
 
@@ -31,4 +40,4 @@ RUN for PROGRAM in master http-proxy node scheduler controller-agent job-proxy e
     do ln -s /usr/bin/ytserver-all /usr/bin/ytserver-$PROGRAM; done
 
 
-CMD ["supervisord"]
+CMD ["/yt_scripts/start.sh"]
