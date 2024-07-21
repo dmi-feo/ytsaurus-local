@@ -32,6 +32,7 @@ COPY ./yt_init /yt_scripts/yt_init
 COPY ./prepare_yt_configs.py /yt_scripts/prepare_yt_configs.py
 COPY ./start.sh /yt_scripts/start.sh
 COPY ./init_container.sh /yt_scripts/init_container.sh
+COPY ./maybe_start_containerd.sh /yt_scripts/maybe_start_containerd.sh
 
 VOLUME /var/lib/containerd
 
