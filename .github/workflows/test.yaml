@@ -20,4 +20,4 @@ jobs:
         run: pip install ytsaurus-client
 
       - name: "run test.sh"
-        run: ./test.sh
+        run: ./tests/test.sh

@@ -9,8 +9,10 @@ container_id=$(docker run -q -d --privileged -p $port_num:80 $image_id)
 
 trap 'docker stop $container_id && docker rm $container_id' EXIT
 
-export YT_TOKEN="topsecret"
+#export YT_TOKEN="topsecret"
 export YT_PROXY="localhost:$port_num"
+
+sleep 10s
 
 i=0
 while [ 1 ]
