@@ -30,6 +30,7 @@ if os.environ.get("YTLOCAL_AUTH_ENABLED", "0") == "1":
 
 if os.environ.get("YTLOCAL_CRI_ENABLED", "0") == "1":
     with modify_yt_config(NODE_CONFIG_PATH) as node_config:
+        node_config["exec_node"]["forward_all_environment_variables"] = True
         node_config["exec_node"]["slot_manager"]["job_environment"] = {
             "type": "cri",
             "job_proxy_image": "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0",

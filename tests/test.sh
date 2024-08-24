@@ -37,6 +37,9 @@ timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="python3 --version | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
   --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
 
+timeout --preserve-status -v 3m yt vanilla \
+  --tasks '{task={job_count=1; command="echo $PYTHON_VERSION | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
+  --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
 
 # check auth is working
 

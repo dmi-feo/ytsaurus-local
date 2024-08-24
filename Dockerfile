@@ -1,4 +1,4 @@
-FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.0 AS ytsaurus
+FROM ghcr.io/ytsaurus/ytsaurus:stable-23.2.1 AS ytsaurus
 FROM ubuntu:22.04
 
 RUN apt-get update && \
