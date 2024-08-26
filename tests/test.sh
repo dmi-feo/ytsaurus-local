@@ -34,11 +34,11 @@ do
 done
 
 
-if [ ! "$(yt exists //tmp/foo)" == "\"true\"" ]; then
+if [ ! "$(yt exists //tmp/foo)" = "\"true\"" ]; then
   echo "//tmp/foo does not exist" && exit 1
 fi
 
-if [ ! "$(yt exists //tmp/bar)" == "\"true\"" ]; then
+if [ ! "$(yt exists //tmp/bar)" = "\"true\"" ]; then
   echo "//tmp/bar does not exist" && exit 1
 fi
 
