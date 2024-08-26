@@ -34,6 +34,14 @@ do
 done
 
 
+if [ ! "$(yt exists //tmp/foo)" == "true" ]; then
+  echo "//tmp/foo does not exist" && exit 1
+fi
+
+if [ ! "$(yt exists //tmp/bar)" == "true" ]; then
+  echo "//tmp/bar does not exist" && exit 1
+fi
+
 timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="python3 --version | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
   --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
@@ -41,6 +49,7 @@ timeout --preserve-status -v 3m yt vanilla \
 timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="echo $PYTHON_VERSION | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
   --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
+
 
 # check auth is working
 
