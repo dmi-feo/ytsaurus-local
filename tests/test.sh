@@ -33,6 +33,7 @@ do
     fi
 done
 
+yt list //tmp
 
 if [ ! "$(yt exists //tmp/foo)" = "\"true\"" ]; then
   echo "//tmp/foo does not exist" && exit 1
