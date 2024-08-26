@@ -33,7 +33,7 @@ if os.environ.get("YTLOCAL_CRI_ENABLED", "0") == "1":
         node_config["exec_node"]["forward_all_environment_variables"] = True
         node_config["exec_node"]["slot_manager"]["job_environment"] = {
             "type": "cri",
-            "job_proxy_image": "ghcr.io/ytsaurus/ytsaurus:stable-23.2.0",
+            "job_proxy_image": "ghcr.io/ytsaurus/ytsaurus:stable-23.2.1",
             "use_job_proxy_from_image": False,
             "cri_executor": {
                 "runtime_endpoint": "unix:///run/containerd/containerd.sock",
