@@ -25,6 +25,7 @@ COPY ./containerd.toml /etc/containerd/config.toml
 
 RUN mkdir /yt_scripts
 RUN mkdir /yt_configs
+RUN mkdir /yt_post_init_scripts
 
 COPY ./yt_configs /yt_configs
 

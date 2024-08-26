@@ -82,4 +82,8 @@ yt create document //sys/client_config --attributes '{"value"={"proxy"={"enable_
 
 yt set --format json //sys/rpc_proxies/@balancers '{ "default": { "internal_rpc": { "default": ["localhost:20069"]} } }'
 
-yt remove //sys/@provision_lock -f
+for filename in /yt_post_init_scripts/*; do "$filename"; done
+
+yt set //sys/@ytsaurus_local_ready true
+
+yt remove //sys/@provision_lock -f  # TODO: consider removing

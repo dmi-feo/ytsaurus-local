@@ -9,6 +9,7 @@ container_id=$(docker run -q -d \
   --privileged \
   -p $port_num:80 \
   -e YTLOCAL_AUTH_ENABLED=1 -e YTLOCAL_CRI_ENABLED=1 \
+  -v ./post_init_scripts:/yt_post_init_scripts \
   $image_id)
 
 trap 'docker stop $container_id && docker rm $container_id' EXIT
@@ -21,8 +22,8 @@ sleep 20s
 i=0
 while [ 1 ]
 do
-    lock_exists_str=$(yt exists //sys/@provision_lock 2>/dev/null || echo "true")
-    if [[ $lock_exists_str = "false" ]];
+    ready=$(yt get //sys/@ytsaurus_local_ready 2>/dev/null || echo "false")
+    if [[ $ready = "true" ]];
     then
       break
     else
