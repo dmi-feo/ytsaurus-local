@@ -78,7 +78,7 @@ if [ $(yt exists //sys/users/admin) = 'false' ]; then
   yt add-member admin superusers
 fi
 
-yt create document //sys/client_config --attributes '{"value"={"proxy"={"enable_proxy_discovery"=%false};};}'
+yt create document //sys/client_config -f --attributes '{"value"={"proxy"={"enable_proxy_discovery"=%false};};}'
 
 yt set --format json //sys/rpc_proxies/@balancers '{ "default": { "internal_rpc": { "default": ["localhost:20069"]} } }'
 
