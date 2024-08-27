@@ -5,10 +5,15 @@ set -ex
 image_id=$(docker build -q --platform linux/amd64 .)
 port_num=$(shuf -i 40000-50000 -n 1)
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo $SCRIPT_DIR/post_init_scripts
+
 container_id=$(docker run -q -d \
   --privileged \
   -p $port_num:80 \
   -e YTLOCAL_AUTH_ENABLED=1 -e YTLOCAL_CRI_ENABLED=1 \
+  -v $SCRIPT_DIR/post_init_scripts:/yt_post_init_scripts \
   $image_id)
 
 trap 'docker stop $container_id && docker rm $container_id' EXIT
@@ -21,8 +26,8 @@ sleep 20s
 i=0
 while [ 1 ]
 do
-    lock_exists_str=$(yt exists //sys/@provision_lock 2>/dev/null || echo "true")
-    if [[ $lock_exists_str = "false" ]];
+    ready=$(yt get //sys/@ytsaurus_local_ready 2>/dev/null || echo "false")
+    if [ $ready = "\"true\"" ];
     then
       break
     else
@@ -32,6 +37,13 @@ do
     fi
 done
 
+if [ "$(yt exists //tmp/foo)" != "true" ]; then
+  echo "//tmp/foo does not exist" && exit 1
+fi
+
+if [ "$(yt exists //tmp/bar)" != "true" ]; then
+  echo "//tmp/bar does not exist" && exit 1
+fi
 
 timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="python3 --version | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
@@ -40,6 +52,7 @@ timeout --preserve-status -v 3m yt vanilla \
 timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="echo $PYTHON_VERSION | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
   --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
+
 
 # check auth is working
 

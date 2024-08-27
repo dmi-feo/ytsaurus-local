@@ -10,6 +10,8 @@ services:
     ports:
       - 38000:80
     privileged: true
+    volumes:
+      - ./tests/post_init_scripts:/yt_post_init_scripts
   yt-ui:
     image: ytsaurus/ui:stable
     ports:
