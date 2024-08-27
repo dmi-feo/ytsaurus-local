@@ -5,11 +5,15 @@ set -ex
 image_id=$(docker build -q --platform linux/amd64 .)
 port_num=$(shuf -i 40000-50000 -n 1)
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+echo $SCRIPT_DIR/post_init_scripts
+
 container_id=$(docker run -q -d \
   --privileged \
   -p $port_num:80 \
   -e YTLOCAL_AUTH_ENABLED=1 -e YTLOCAL_CRI_ENABLED=1 \
-  -v ./post_init_scripts:/yt_post_init_scripts \
+  -v $SCRIPT_DIR/post_init_scripts:/yt_post_init_scripts \
   $image_id)
 
 trap 'docker stop $container_id && docker rm $container_id' EXIT
@@ -33,13 +37,11 @@ do
     fi
 done
 
-yt list //tmp
-
-if [ ! "$(yt exists //tmp/foo)" = "\"true\"" ]; then
+if [ "$(yt exists //tmp/foo)" != "true" ]; then
   echo "//tmp/foo does not exist" && exit 1
 fi
 
-if [ ! "$(yt exists //tmp/bar)" = "\"true\"" ]; then
+if [ "$(yt exists //tmp/bar)" != "true" ]; then
   echo "//tmp/bar does not exist" && exit 1
 fi
 
