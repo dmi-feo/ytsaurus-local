@@ -27,7 +27,7 @@ i=0
 while [ 1 ]
 do
     ready=$(yt get //sys/@ytsaurus_local_ready 2>/dev/null || echo "false")
-    if [ $ready = "\"true\"" ];
+    if [ $ready = "%true" ];
     then
       break
     else

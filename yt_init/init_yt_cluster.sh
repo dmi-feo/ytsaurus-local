@@ -85,6 +85,6 @@ yt set --format json //sys/rpc_proxies/@balancers '{ "default": { "internal_rpc"
 shopt -s nullglob
 for filename in /yt_post_init_scripts/*; do "$filename"; done
 
-yt set //sys/@ytsaurus_local_ready true
+yt set //sys/@ytsaurus_local_ready '%true'
 
 yt remove //sys/@provision_lock -f  # TODO: consider removing
