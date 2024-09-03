@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 RUN apt-get update && \
     apt-get install -y \
       supervisor python3 python3-pip containerd less \
-      wget iptables sudo \
+      wget iptables sudo curl netcat vim \
     && apt-get clean
 
 COPY --from=ytsaurus /usr/bin/ytserver-all /usr/bin/ytserver-all

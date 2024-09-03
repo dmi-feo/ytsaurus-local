@@ -3,7 +3,7 @@
 set -ex
 
 image_id=$(docker build -q --platform linux/amd64 .)
-port_num=$(shuf -i 40000-50000 -n 1)
+port_num_http=$(shuf -i 40000-50000 -n 1)
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -11,7 +11,8 @@ echo $SCRIPT_DIR/post_init_scripts
 
 container_id=$(docker run -q -d \
   --privileged \
-  -p $port_num:80 \
+  -p $port_num_http:80 \
+  -p 20069:20069 \
   -e YTLOCAL_AUTH_ENABLED=1 -e YTLOCAL_CRI_ENABLED=1 \
   -v $SCRIPT_DIR/post_init_scripts:/yt_post_init_scripts \
   $image_id)
@@ -19,7 +20,7 @@ container_id=$(docker run -q -d \
 trap 'docker stop $container_id && docker rm $container_id' EXIT
 
 export YT_TOKEN="topsecret"
-export YT_PROXY="localhost:$port_num"
+export YT_PROXY="http://localhost:$port_num_http"
 
 sleep 20s
 
@@ -45,6 +46,10 @@ if [ "$(yt exists //tmp/bar)" != "true" ]; then
   echo "//tmp/bar does not exist" && exit 1
 fi
 
+#sleep 10m
+
+YT_CONFIG_PATCHES='{backend=rpc}' yt list /
+
 timeout --preserve-status -v 3m yt vanilla \
   --tasks '{task={job_count=1; command="python3 --version | grep -q 3.9.19"; docker_image="docker.io/library/python:3.9.19"}}' \
   --spec '{resource_limits={user_slots=1}; max_failed_job_count=1}'
@@ -58,3 +63,6 @@ timeout --preserve-status -v 3m yt vanilla \
 
 unset YT_TOKEN
 yt list / && { echo "Something wrong with yt auth"; exit 1; } || echo "Auth ok"
+
+
+echo "==============SUCCESS=============="
