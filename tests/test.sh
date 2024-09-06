@@ -37,6 +37,8 @@ do
     fi
 done
 
+yt create user --attributes '{name=test_user}'
+
 if [ "$(yt exists //tmp/foo)" != "true" ]; then
   echo "//tmp/foo does not exist" && exit 1
 fi
