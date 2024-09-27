@@ -66,6 +66,26 @@ yt set //sys/@cluster_connection '{
     };
 }'
 
+yt set //sys/rpc_proxies/@config '{
+  "rpc_server" = {
+      "services" = {
+          "ApiService" = {
+              "authentication_queue_size_limit" = 500000;
+              "methods" = {
+                  "CreateNode" = {
+                      "concurrency_limit" = 30000;
+                      "queue_size_limit" = 10000000;
+                  };
+                  "GetNode" = {
+                      "concurrency_limit" = 50000;
+                      "queue_size_limit" = 500000;
+                  };
+              };
+          };
+      };
+  };
+}'
+
 if [ $(yt exists //sys/controller_agents/config/operation_options/spec_template) = 'false' ]; then
   yt set //sys/controller_agents/config/operation_options/spec_template '{enable_partitioned_data_balancing=%false}' -r
 fi

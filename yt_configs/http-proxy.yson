@@ -1,4 +1,5 @@
 {
+    "port" = 80;
     auth={
         "cypress_cookie_manager"={
         };
@@ -19,8 +20,7 @@
     "dynamic_config_manager" = {
         "update_period" = 500;
     };
-    "monitoring_port" = 11107;
-    "rpc_port" = 20069;
+    "monitoring_port" = 11106;
     "stockpile" = {
         "thread_count" = 0;
     };
@@ -65,7 +65,7 @@
         "writers" = {
             "info" = {
                 "type" = "file";
-                "file_name" = "/var/log/yt-proxy.log";
+                "file_name" = "/var/log/yt-http-proxy.log";
             };
         };
     };
