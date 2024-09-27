@@ -37,6 +37,18 @@ do
     fi
 done
 
+# check dynamic tables
+yt set //sys/accounts/tmp/@resource_limits/tablet_count 100500
+yt create tablet_cell --attr '{tablet_cell_bundle=default}'
+
+yt create table //tmp/dyntable --attributes '{dynamic=%true;schema=[{name=id;type=uint64;sort_order=ascending};{name=first_name;type=string};{name=last_name;type=string}]}'
+
+yt mount-table //tmp/dyntable
+
+echo '{id=1;first_name=Ivan;last_name=Ivanov}; {id=2;first_name=Petr;last_name=Petrov};{id=3;first_name=Sid;last_name=Sidorov}' |
+yt insert-rows //tmp/dyntable --format yson
+
+
 if [ "$(yt exists //tmp/foo)" != "true" ]; then
   echo "//tmp/foo does not exist" && exit 1
 fi
